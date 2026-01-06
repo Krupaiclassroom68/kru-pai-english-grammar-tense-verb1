@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kru Pai — Tense 5 Basic (Verb Forms)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+Thai:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f8fb;
+  --surface:#ffffff;
+  --surface2:#ffffff;
+  --ink:#111827;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --accent:#2563eb;        /* clean blue */
+  --accent2:#eff6ff;       /* soft blue tint */
+  --ok:#16a34a;
+  --bad:#dc2626;
+  --shadow:0 10px 30px rgba(17,24,39,.08);
+  --radius:16px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:"Inter","Noto Sans Thai",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);
+  color:var(--ink); min-height:100%;
+}
+.header{
+  position:sticky;top:0;z-index:10;
+  background:rgba(255,255,255,.92);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(10px);
+}
+.banner{max-width:980px;margin:auto;display:flex;align-items:center;gap:12px;padding:14px 16px}
+.logo{
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+  background:var(--accent2); color:var(--accent);
+  font-weight:800; letter-spacing:.5px; border:1px solid var(--border)
+}
+.brand{font-weight:800;font-size:clamp(16px,2.4vw,22px);color:var(--ink)}
+.sub{margin-left:auto;font-size:12px;color:var(--muted)}
+
+.wrap{max-width:980px;margin:16px auto;padding:0 12px}
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.hide{display:none !important}
+
+.start{padding:18px; display:grid; gap:14px; justify-items:center; text-align:center}
+.bigtitle{font-weight:800;font-size:clamp(22px,4.2vw,36px); color:var(--ink)}
+.tagline{font-size:clamp(13px,2.4vw,16px); color:var(--muted); line-height:1.5}
+.input{
+  display:flex;gap:10px;align-items:center;
+  background:var(--accent2);
+  padding:10px 12px;border-radius:14px;border:1px solid var(--border)
+}
+.input span{font-weight:700;color:var(--ink)}
+.input input{border:none;background:transparent; outline:none; font-size:16px; min-width:220px; color:var(--ink)}
+.btn{
+  border:1px solid var(--border);
+  cursor:pointer; padding:11px 16px;border-radius:14px;
+  background:var(--accent); color:#fff; font-weight:800;
+  box-shadow:0 8px 18px rgba(37,99,235,.18);
+  transition:.18s transform,.18s filter;
+}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.02)}
+.btn:active{transform:translateY(0px)}
+.btn.alt{
+  background:#fff;color:var(--ink);
+  box-shadow:none;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.alt{background:#000;color:#FACC15; border:2px solid var(--yellow); box-shadow:0 10px 0 #000, 0 18px 36px rgba(0,0,0,.35)}
+.note{font-size:12px;color:#a1a1aa;max-width:760px}
+
+.hud{display:grid; grid-template-columns:1fr auto auto; align-items:center; gap:8px; padding:12px 12px; border-bottom:1px solid var(--border)}
+.pill{
+  border:1px solid var(--border);
+  padding:6px 10px;border-radius:999px;
+  font-weight:700;color:var(--ink);
+  background:#fff;
+}
+.pill.score{background:var(--accent2); border-color:#dbeafe; color:var(--accent)}
+.pill.score b{color:var(--accent)}
+.pill.step{background:#fff;color:var(--ink)}
+.progress{height:8px;background:#eef2ff;border-radius:999px;overflow:hidden;border:1px solid #dbeafe}
+.progress>div{height:100%;background:linear-gradient(90deg,var(--accent),#60a5fa);width:0%}
+
+.stage{padding:14px}
+.qbox{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:none;
+  max-width:920px; margin:0 auto;
+}
+.tenseTag{
+  display:inline-flex;gap:8px;align-items:center; justify-content:center;
+  padding:6px 10px;border-radius:999px;
+  background:var(--accent2);
+  border:1px solid #dbeafe;
+  color:var(--accent); font-weight:800; margin:0 auto 10px;
+}
+.th{font-weight:800;font-size:clamp(18px,3.0vw,24px); text-align:center; line-height:1.35; color:var(--ink)}
+.en{margin-top:10px; font-weight:800; font-size:clamp(18px,3.2vw,26px); text-align:center; color:var(--accent)}
+.blank{
+  display:inline-block; min-width:86px; padding:2px 10px; border-radius:12px;
+  background:var(--accent2); border:1px dashed #93c5fd; color:var(--ink)
+}
+
+.choices{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:14px}
+.choice{
+  padding:12px 12px; border-radius:14px;
+  background:#fff; border:1px solid var(--border);
+  font-weight:800; font-size:clamp(16px,2.6vw,19px);
+  text-align:center; cursor:pointer; user-select:none;
+  box-shadow:0 6px 18px rgba(17,24,39,.06);
+  transition:.12s transform,.12s border-color;
+}
+.choice:hover{transform:translateY(-2px);border-color:#c7d2fe}
+.choice.selected{background:var(--accent2); border-color:#93c5fd}
+.choice.disabled{opacity:.55; cursor:not-allowed; transform:none}
+.choice:hover{transform:translateY(-2px)}
+.choice.selected{background:rgba(255,214,10,.18); border-color:#FACC15; box-shadow:0 12px 26px rgba(255,214,10,.20)}
+.choice.disabled{opacity:.45; cursor:not-allowed; transform:none}
+.feedback{margin:12px 0 0; text-align:center}
+.feedback .ok{
+  display:inline-flex; gap:10px; align-items:center; justify-content:center;
+  padding:10px 14px; border-radius:14px;
+  border:1px solid #bbf7d0; background:#f0fdf4;
+  font-weight:800; font-size:clamp(15px,2.6vw,18px); color:#065f46;
+}
+.feedback .no{
+  display:inline-flex; gap:10px; align-items:center; justify-content:center;
+  padding:10px 14px; border-radius:14px;
+  border:1px solid #fecaca; background:#fef2f2;
+  font-weight:800; font-size:clamp(15px,2.6vw,18px); color:#7f1d1d;
+}
+.bigCheck{
+  display:inline-grid; place-items:center; width:42px; height:42px; border-radius:12px;
+  background:var(--accent); color:#fff; font-weight:900; font-size:22px;
+}
+
+.footer{
+  position:sticky; bottom:0; z-index:5; padding:12px;
+  display:flex; justify-content:center; gap:10px; flex-wrap:wrap;
+  background:rgba(247,248,251,.9);
+  backdrop-filter: blur(10px);
+  border-top:1px solid var(--border)
+}
+.footer .btn{min-width:160px}
+.footer .btn{
+  border:1px solid var(--border);
+  cursor:pointer; padding:11px 16px;border-radius:14px;
+  background:var(--accent); color:#fff; font-weight:800;
+  box-shadow:0 8px 18px rgba(37,99,235,.18);
+  transition:.18s transform,.18s filter;
+}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.02)}
+.btn:active{transform:translateY(0px)}
+.btn.alt{
+  background:#fff;color:var(--ink);
+  box-shadow:none;
+}
+
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.shake{animation:shake .18s linear 0s 2}
+
+.fx{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:hidden}
+.fx i{position:absolute; width:10px; height:14px; opacity:.95; animation:fall 1100ms linear forwards}
+@keyframes fall{to{transform:translateY(120vh) rotate(720deg);opacity:0}}
+
+.rain{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:hidden}
+.rain b{position:absolute; width:6px; height:20px; border-radius:999px; opacity:.9; animation:rainFall 900ms linear forwards}
+@keyframes rainFall{to{transform:translateY(120vh);opacity:0}}
+
+@media (max-width:520px){ .choices{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="banner">
+      <div class="logo">KP</div>
+      <div class="brand">Kru Pai Classroom</div>
+      <div class="sub">Tense • 5 Basic (Verb Forms)</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div id="intro" class="card start">
+      <div class="bigtitle">Tense Master Challenge ⚡</div>
+      <div class="tagline">ฝึก 5 Tense พื้นฐาน (20 ข้อ) — เลือกรูปกริยาให้ถูกต้อง 💛🖤</div>
+      <div class="input"><span>ชื่อเล่น:</span> <input id="nickname" placeholder="พิมพ์ชื่อก่อนเริ่ม"/></div>
+      <button class="btn" onclick="startGame()">เริ่มเกมเลย!</button>
+      <div class="note">รูปแบบตัวเลือก: กริยาคำเดียวกัน แต่คนละรูป (เช่น <b>go / went / gone / going</b>) เพื่อฝึกเลือก Tense ให้แม่น 🎯</div>
+    </div>
+
+    <div id="game" class="card hide">
+      <div class="hud">
+        <div class="pill step">ข้อที่ <b id="step">1</b> / <span id="total">20</span></div>
+        <div class="pill score">คะแนน: <b id="score">0</b></div>
+        <div class="pill">ผู้เล่น: <b id="who">-</b></div>
+      </div>
+      <div class="progress"><div id="bar"></div></div>
+
+      <div class="stage">
+        <div class="qbox" id="qbox">
+          <div class="tenseTag">🧠 <span id="tense">—</span></div>
+          <div id="th" class="th">—</div>
+          <div id="en" class="en">—</div>
+
+          <div id="choices" class="choices"></div>
+          <div id="fb" class="feedback"></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <button class="btn alt" onclick="backHome()">กลับหน้าแรก</button>
+        <button class="btn" id="checkBtn" onclick="checkAns()">ตรวจคำตอบ</button>
+        <button class="btn alt" id="nextBtn" onclick="nextQ()" disabled>ข้อต่อไป ➜</button>
+      </div>
+    </div>
+
+    <div id="summary" class="card hide" style="padding:18px; display:grid; gap:10px; justify-items:center; text-align:center">
+      <div class="bigtitle">ภารกิจสำเร็จ! 🏆⚡</div>
+      <div class="tagline">😍 <b id="who2">-</b> ได้ <b id="score2">0</b> / <b id="total2">20</b></div>
+      <div class="note">เล่นซ้ำยิ่งเก่งขึ้นนะ 🌈✨ (ฝึกสังเกตคำช่วย: <b>am/is/are</b>, <b>have</b>, <b>will</b>)</div>
+      <div class="footer">
+        <button class="btn alt" onclick="backHome()">กลับหน้าแรก</button>
+        <button class="btn" onclick="startGame()">เล่นอีกครั้ง</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="fx" class="fx hide"></div>
+  <div id="rain" class="rain hide"></div>
+
+<script>
+const SET = [{"tense": "Present Simple", "th": "ฉันไปโรงเรียนทุกวัน", "en": "I ____ to school every day.", "options": ["go", "went", "gone", "going"], "answer": "go"}, {"tense": "Present Continuous", "th": "ตอนนี้ฉันกำลังกินข้าวอยู่", "en": "I am ____ rice now.", "options": ["eat", "ate", "eaten", "eating"], "answer": "eating"}, {"tense": "Past Simple", "th": "เมื่อวานฉันเห็นแมวตัวหนึ่ง", "en": "I ____ a cat yesterday.", "options": ["see", "saw", "seen", "seeing"], "answer": "saw"}, {"tense": "Present Perfect", "th": "ฉันทำการบ้านเสร็จแล้ว", "en": "I have ____ my homework already.", "options": ["do", "did", "done", "doing"], "answer": "done"}, {"tense": "Future Simple", "th": "พรุ่งนี้ฉันจะไปตลาด", "en": "I will ____ to the market tomorrow.", "options": ["go", "went", "gone", "going"], "answer": "go"}, {"tense": "Present Simple", "th": "เราเล่นฟุตบอลทุกเย็น", "en": "We ____ football every evening.", "options": ["play", "played", "playing", "plays"], "answer": "play"}, {"tense": "Present Continuous", "th": "ตอนนี้พวกเขากำลังวิ่ง", "en": "They are ____ now.", "options": ["run", "ran", "running", "runs"], "answer": "running"}, {"tense": "Past Simple", "th": "เขาซื้อของเมื่อเช้า", "en": "He ____ some snacks this morning.", "options": ["buy", "bought", "buying", "buys"], "answer": "bought"}, {"tense": "Present Perfect", "th": "เธอเขียนรายงานแล้ว", "en": "She has ____ the report.", "options": ["write", "wrote", "written", "writing"], "answer": "written"}, {"tense": "Future Simple", "th": "คืนนี้เราจะดูหนัง", "en": "We will ____ a movie tonight.", "options": ["watch", "watched", "watching", "watchs"], "answer": "watch"}, {"tense": "Present Simple", "th": "พวกเขาดื่มน้ำเยอะมาก", "en": "They ____ a lot of water.", "options": ["drink", "drank", "drunk", "drinking"], "answer": "drink"}, {"tense": "Present Continuous", "th": "ตอนนี้ฉันกำลังว่ายน้ำ", "en": "I am ____ now.", "options": ["swim", "swam", "swum", "swimming"], "answer": "swimming"}, {"tense": "Past Simple", "th": "เมื่อวานเราไปหาดใหญ่", "en": "We ____ to Hat Yai yesterday.", "options": ["go", "went", "gone", "going"], "answer": "went"}, {"tense": "Present Perfect", "th": "ฉันได้เลือกชุดแล้ว", "en": "I have ____ my outfit.", "options": ["choose", "chose", "chosen", "choosing"], "answer": "chosen"}, {"tense": "Future Simple", "th": "ปีหน้าเขาจะขับรถไปเชียงใหม่", "en": "He will ____ to Chiang Mai next year.", "options": ["drive", "drove", "driven", "driving"], "answer": "drive"}, {"tense": "Present Simple", "th": "ฉันพูดภาษาอังกฤษทุกวัน", "en": "I ____ English every day.", "options": ["speak", "spoke", "spoken", "speaking"], "answer": "speak"}, {"tense": "Present Continuous", "th": "ตอนนี้เธอกำลังร้องเพลง", "en": "She is ____ a song now.", "options": ["sing", "sang", "sung", "singing"], "answer": "singing"}, {"tense": "Past Simple", "th": "เขาเอาหนังสือไปโรงเรียน", "en": "He ____ the book to school.", "options": ["take", "took", "taken", "taking"], "answer": "took"}, {"tense": "Present Perfect", "th": "ฉันลืมกุญแจแล้ว", "en": "I have ____ my keys.", "options": ["forget", "forgot", "forgotten", "forgetting"], "answer": "forgotten"}, {"tense": "Future Simple", "th": "พรุ่งนี้พวกเราจะเริ่มโปรเจ็กต์ใหม่", "en": "We will ____ a new project tomorrow.", "options": ["begin", "began", "begun", "beginning"], "answer": "begin"}];
+
+const total = SET.length;
+document.getElementById('total').textContent = total;
+document.getElementById('total2').textContent = total;
+
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+let order = [];
+let idx = 0;
+let score = 0;
+let nickname = "ผู้เล่น";
+let selected = null;
+let locked = false;
+
+function startGame(){
+  nickname = (document.getElementById('nickname').value || "ผู้เล่น").trim();
+  document.getElementById('who').textContent = nickname;
+  document.getElementById('who2').textContent = nickname;
+
+  document.getElementById('intro').classList.add('hide');
+  document.getElementById('summary').classList.add('hide');
+  document.getElementById('game').classList.remove('hide');
+
+  score = 0; idx = 0; locked = false;
+  order = shuffle([...Array(SET.length).keys()]);
+  renderQ();
+  clickSound(); // start click
+}
+document.getElementById('nickname').addEventListener('keydown', e=>{ if(e.key==='Enter') startGame(); });
+
+function backHome(){
+  document.getElementById('game').classList.add('hide');
+  document.getElementById('summary').classList.add('hide');
+  document.getElementById('intro').classList.remove('hide');
+}
+
+function renderQ(){
+  locked = false;
+  selected = null;
+  document.getElementById('checkBtn').disabled = false;
+  document.getElementById('nextBtn').disabled = true;
+  document.getElementById('fb').innerHTML = "";
+
+  const item = SET[order[idx]];
+  document.getElementById('step').textContent = (idx+1);
+  document.getElementById('score').textContent = score;
+  document.getElementById('bar').style.width = ((idx)/total*100)+'%';
+
+  document.getElementById('tense').textContent = item.tense;
+  document.getElementById('th').textContent = item.th;
+
+  // show English with blank
+  const blanked = item.en.replace("____", '<span class="blank">____</span>');
+  document.getElementById('en').innerHTML = blanked;
+
+  // choices
+  const box = document.getElementById('choices');
+  box.innerHTML = "";
+  const opts = shuffle([...item.options]);
+  opts.forEach(opt=>{
+    const b = document.createElement('div');
+    b.className = 'choice';
+    b.textContent = opt;
+    b.addEventListener('click', ()=> selectChoice(b, opt));
+    box.appendChild(b);
+  });
+}
+
+function selectChoice(el, value){
+  if(locked) return;
+  clickSound();
+  document.querySelectorAll('.choice').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  selected = value;
+}
+
+function checkAns(){
+  if(locked) return;
+  if(!selected){
+    // gentle hint
+    document.getElementById('fb').innerHTML = `<div class="no">🙂 เลือกคำตอบก่อนน้า</div>`;
+    thunderSoft();
+    document.getElementById('qbox').classList.add('shake');
+    setTimeout(()=>document.getElementById('qbox').classList.remove('shake'), 280);
+    return;
+  }
+
+  locked = true;
+  const item = SET[order[idx]];
+  const ok = (selected === item.answer);
+
+  document.querySelectorAll('.choice').forEach(c=>c.classList.add('disabled'));
+  document.getElementById('checkBtn').disabled = true;
+
+  if(ok){
+    score += 1;
+    document.getElementById('score').textContent = score;
+    document.getElementById('fb').innerHTML =
+      `<div class="ok"><span class="bigCheck">✓</span> 🤩 เย้! ถูกต้องจ้า 🌈✨</div>`;
+    rainbowRain();
+    confetti();
+    successChime();
+    document.getElementById('nextBtn').disabled = false;
+  }else{
+    document.getElementById('fb').innerHTML =
+      `<div class="no">😅 ยังไม่ใช่จ้า ลองใหม่ในข้อต่อไปนะ ⚡</div>`;
+    thunderSoft();
+    document.getElementById('qbox').classList.add('shake');
+    setTimeout(()=>document.getElementById('qbox').classList.remove('shake'), 280);
+    document.getElementById('nextBtn').disabled = false; // ไปต่อได้เลย
+  }
+}
+
+function nextQ(){
+  if(idx < total-1){
+    idx++;
+    renderQ();
+  }else{
+    endGame();
+  }
+}
+
+function endGame(){
+  document.getElementById('game').classList.add('hide');
+  document.getElementById('summary').classList.remove('hide');
+  document.getElementById('score2').textContent = score;
+  document.getElementById('bar').style.width = '100%';
+  successChime(true);
+}
+
+function confetti(){
+  const fx = document.getElementById('fx');
+  fx.classList.remove('hide');
+  fx.innerHTML = "";
+  const colors = ['#FFD60A','#FFB703','#FFFFFF','#22c55e','#60a5fa','#a78bfa'];
+  for(let i=0;i<42;i++) {
+    const e = document.createElement('i');
+    e.style.left = (Math.random()*100) + 'vw';
+    e.style.top = '-10vh';
+    e.style.background = colors[i%colors.length];
+    e.style.animationDelay = (Math.random()*0.12)+'s';
+    fx.appendChild(e);
+  }
+  setTimeout(()=>{ fx.classList.add('hide'); fx.innerHTML=""; }, 1100);
+}
+
+function rainbowRain(){
+  const rain = document.getElementById('rain');
+  rain.classList.remove('hide');
+  rain.innerHTML = "";
+  const colors = ['#ef4444','#f97316','#facc15','#22c55e','#3b82f6','#a855f7'];
+  for(let i=0;i<70;i++) {
+    const b = document.createElement('b');
+    b.style.left = (Math.random()*100)+'vw';
+    b.style.top = (-10 - Math.random()*40)+'vh';
+    b.style.background = colors[i%colors.length];
+    b.style.animationDelay = (Math.random()*0.15)+'s';
+    b.style.transform = `rotate(${(Math.random()*18-9).toFixed(1)}deg)`;
+    rain.appendChild(b);
+  }
+  setTimeout(()=>{ rain.classList.add('hide'); rain.innerHTML=""; }, 950);
+}
+
+// ======= Sounds (no external files) =======
+function ensureAudio(){
+  try{ return new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ return null; }
+}
+function tone(freq, dur, type='sine', gain=0.18, glideTo=null){
+  const ctx = ensureAudio(); if(!ctx) return;
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.type = type;
+  o.frequency.setValueAtTime(freq, ctx.currentTime);
+  if(glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, ctx.currentTime + dur);
+  g.gain.setValueAtTime(0.001, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(gain, ctx.currentTime + 0.01);
+  g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(); o.stop(ctx.currentTime + dur + 0.02);
+}
+
+function clickSound(){
+  // cute click: short pop
+  tone(880, 0.05, 'triangle', 0.14, 660);
+}
+
+function successChime(isEnd=false){
+  // happy sparkle
+  tone(880, 0.07, 'sine', 0.16);
+  setTimeout(()=>tone(1320, 0.07, 'sine', 0.16), 90);
+  setTimeout(()=>tone(1760, 0.08, 'triangle', 0.14), 180);
+  if(isEnd) setTimeout(()=>tone(990, 0.12, 'sine', 0.14), 320);
+}
+
+function thunderSoft(){
+  // soft thunder: quick low rumble + tiny crack
+  tone(120, 0.18, 'sawtooth', 0.10, 70);
+  setTimeout(()=>tone(260, 0.06, 'square', 0.06, 200), 40);
+}
+</script>
+</body>
+</html>
